@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(49, 42, 42, 0.1);
+
+  border-radius: 10px;
+}
+
+.circle {
+  clip-path: circle(50% at 50% 50%);
+}
+
+.-animate-spin {
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
