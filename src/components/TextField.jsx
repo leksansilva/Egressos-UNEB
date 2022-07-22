@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export function TextField({
   onChange,
   name,
@@ -6,23 +8,32 @@ export function TextField({
   type,
   fullWidth,
   className,
+  onKeyUp,
+  required,
+  error,
 }) {
+  useEffect(() => {}, [error]);
   return (
     <div className={`flex flex-col gap-2 w-full ${className}`}>
       {describe && (
-        <label className="text-white text-xl" htmlFor={name}>
+        <label
+          className={`${error ? "text-red-500" : "text-white"} text-xl`}
+          htmlFor={name}
+        >
           {describe}:
         </label>
       )}
       <input
+        required={required}
         className={` px-6 text-gray-500 rounded-2xl h-11 outline-none border-2 focus:border-gray-400 ${
-          fullWidth ? "w-full" : "w-64"
-        }`}
-        type={type}
+          error ? "border-red-500" : "border-white"
+        } ${fullWidth ? "w-full" : "w-full"}`}
+        type={type ? type : "text"}
         value={value}
         onChange={onChange}
         name={name}
         id={name}
+        onKeyUp={onKeyUp}
       />
     </div>
   );

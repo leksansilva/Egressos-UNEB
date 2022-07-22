@@ -6,7 +6,7 @@ export function Navigator() {
   return (
     <div
       className="w-9/12  flex items-center self-start md:self-center
-      mt-5 md:mt-20 h-16 rounded-2xl bg-brand-500"
+      mt-5 md:mt-20 h-16 rounded-2xl bg-brand-500 overflow-hidden"
     >
       <img src={logoEgressos} alt="logo egressos" className="mx-7 h-5/6" />
       <input

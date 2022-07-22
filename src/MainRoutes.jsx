@@ -5,8 +5,8 @@ import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 
 import { Register } from "./pages/Register";
-import { FinalForm } from "./components/FinalForm";
-import { InitialForm } from "./components/InitialForm";
+import { FinalForm } from "./components/Forms/FinalForm";
+import { InitialForm } from "./components/Forms/InitialForm";
 
 export function MainRoutes() {
   return (

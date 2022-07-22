@@ -25,6 +25,7 @@ module.exports = {
         "bottom-4": "center bottom 1rem",
         center: "center",
         left: "left",
+        "left-1": "center left 1rem",
         "left-bottom": "left bottom",
         "left-top": "left top",
         right: "right",
