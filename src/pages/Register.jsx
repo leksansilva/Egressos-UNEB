@@ -13,7 +13,6 @@ const initialValues = {
   course: "",
   cpf: "",
   rg: "",
-  sex: "",
   birthDate: "",
   linkedin: "",
   photo: "",
@@ -28,6 +27,8 @@ const initialValues = {
   yearFinish: "",
   facebook: "",
   instagram: "",
+  experiences: [],
+  educations: [],
 };
 
 const manager = {
@@ -52,10 +53,10 @@ const manager = {
 export function Register() {
   const [values, setValues] = useState(initialValues);
   const { pathname } = useLocation();
-  console.log(manager[pathname]);
-
+  console.log(values);
   const onChange = (ev) => {
     const { value, name } = ev.target;
+
     setValues({ ...values, [name]: value });
   };
   const handleSubmit = (ev) => {
@@ -68,9 +69,9 @@ export function Register() {
       onSubmit={handleSubmit}
       className="px-5 flex flex-col gap-8 items-center"
     >
-      <section className="mt-16">
+      <section className="mt-11 md:mt-16">
         <img className="absolute top-4 right-4" src={LogoUNEB} alt="logo" />
-        <h1 className="font-bold text-4xl text-center ">Dados Cadastrais</h1>
+        <h1 className="font-bold text-4xl md:text-center ">Dados Cadastrais</h1>
       </section>
       <section className="w-full px-20 flex justify-center">
         <Outlet context={[values, onChange]} />

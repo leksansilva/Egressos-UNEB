@@ -5,37 +5,88 @@ import { Button } from "../Button";
 import { TextField } from "../TextField";
 import { FormContent } from "./FormContent/FormContent";
 import { FormSection } from "./FormContent/FormSection";
-import { Modal } from "../Modal";
+import { ModalImage } from "./FormContent/FormModal/ModalImage";
+import { ModalExperience } from "./FormContent/FormModal/ModalExperience";
+import { ModalEducation } from "./FormContent/FormModal/ModalEducation";
 
 import CheckFile from "../../assets/icons/checkFile.svg";
 import AddFile from "../../assets/icons/addFile.svg";
+import Plus from "../../assets/icons/plus.svg";
+import Check from "../../assets/icons/check.svg";
 
 export function FinalForm() {
   const [values, onChange] = useOutletContext();
-  const [uploadPhoto, setUploadPhoto] = useState("");
-  const [openModal, setOpenModal] = useState(false);
+  const [uploadPhoto, setUploadPhoto] = useState(false);
+  const [openModalImage, setOpenModalImage] = useState(false);
+  const [openModalEducation, setOpenModalEducation] = useState(false);
+  const [openModalExperience, setOpenModalExperience] = useState(false);
+  const [addExperience, setAddExperience] = useState(false);
+  const [addEducation, setAddEducation] = useState(false);
 
-  const handleUploadPhoto = () => {
-    setUploadPhoto("oioioo foto bonita");
+  const handleUploadPhoto = (photo) => {
+    setOpenModalImage(false);
+    if (photo) {
+      setUploadPhoto(true);
+      const event = { target: { name: "photo", value: photo } };
+      onChange(event);
+    }
+  };
+  const handleSaveEducations = (educations) => {
+    if (educations[0].describe !== "" && educations[0].initialYear !== "0") {
+      setOpenModalEducation(false);
+    } else {
+      return;
+    }
+
+    if (
+      educations.length > 0 &&
+      educations[0].describe !== "" &&
+      educations[0].initialYear !== "0"
+    ) {
+      setAddEducation(true);
+      const event = { target: { name: "educations", value: educations } };
+      onChange(event);
+    } else {
+      setAddEducation(false);
+    }
   };
 
-  const handleOpenModal = () => {
-    setOpenModal(!openModal);
+  const handleOpenModalImage = () => {
+    setOpenModalImage(!openModalImage);
+  };
+
+  const handleOpenModalEducation = () => {
+    setOpenModalEducation(!openModalEducation);
+  };
+  const handleOpenModalExperience = () => {
+    setOpenModalExperience(!openModalExperience);
   };
 
   return (
     <>
-      {}
-      <Modal open={openModal} closeModal={handleOpenModal} />
+      <ModalImage
+        open={openModalImage}
+        handleUploadPhoto={handleUploadPhoto}
+        closeModal={handleOpenModalImage}
+      />
+      <ModalExperience
+        closeModal={handleOpenModalExperience}
+        open={openModalExperience}
+      />
+      <ModalEducation
+        closeModal={handleOpenModalEducation}
+        open={openModalEducation}
+        handleSaveEducations={handleSaveEducations}
+      />
       <FormContent>
         <FormSection>
           <div className="w-full  md:w-3/12">
             <h1 className="text-xl mb-2 text-white">Foto:</h1>
             <Button
-              onClick={handleOpenModal}
+              onClick={handleOpenModalImage}
               endIcon
               icon={uploadPhoto ? CheckFile : AddFile}
-              className={`border-2 rounded-2xl w-52 ${
+              className={`border-2 rounded-2xl w-full md:w-52 ${
                 uploadPhoto && "bg-green-400 hover:bg-green-500"
               } 
            `}
@@ -52,7 +103,7 @@ export function FinalForm() {
             onChange={onChange}
           />
           <TextField
-            name="photo"
+            name="yearFinish"
             type="date"
             className="w-full  md:w-4/12"
             describe="Ano de Conclusão"
@@ -60,20 +111,38 @@ export function FinalForm() {
             onChange={onChange}
           />
 
-          <TextField
-            name="contact"
-            className="w-full  md:w-6/12"
-            describe="Contato"
-            value={values.contact}
-            onChange={onChange}
-          />
-          <TextField
-            name="contact"
-            className="w-full  md:w-5/12"
-            describe="Contato"
-            value={values.contact}
-            onChange={onChange}
-          />
+          <div className="w-full flex gap-5">
+            <div>
+              <h1 className="text-xl mb-2 text-white">Educação:</h1>
+              <Button
+                onClick={handleOpenModalEducation}
+                endIcon
+                icon={addEducation ? Check : Plus}
+                className={`border-2 rounded-2xl w-full md:w-64 ${
+                  addEducation && "bg-green-400 hover:bg-green-500"
+                } 
+           `}
+              >
+                {addEducation ? "Alterar" : "Carregar"}
+              </Button>
+            </div>
+            <div>
+              <h1 className="text-xl mb-2 text-white">
+                Experiência Profissional:
+              </h1>
+              <Button
+                onClick={handleOpenModalExperience}
+                endIcon
+                icon={addExperience ? Check : Plus}
+                className={`border-2 rounded-2xl w-full md:w-64 ${
+                  addExperience && "bg-green-400 hover:bg-green-500"
+                } 
+           `}
+              >
+                {addExperience ? "Alterar" : "Carregar"}
+              </Button>
+            </div>
+          </div>
         </FormSection>
         <FormSection>
           <TextField

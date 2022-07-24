@@ -11,6 +11,9 @@ export function TextField({
   onKeyUp,
   required,
   error,
+  min,
+  max,
+  step,
 }) {
   useEffect(() => {}, [error]);
   return (
@@ -25,6 +28,9 @@ export function TextField({
       )}
       <input
         required={required}
+        min={min}
+        max={max}
+        step={step}
         className={` px-6 text-gray-500 rounded-2xl h-11 outline-none border-2 focus:border-gray-400 ${
           error ? "border-red-500" : "border-white"
         } ${fullWidth ? "w-full" : "w-full"}`}
