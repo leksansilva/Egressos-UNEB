@@ -69,14 +69,20 @@ export function Register() {
       onSubmit={handleSubmit}
       className="px-5 flex flex-col gap-8 items-center"
     >
-      <section className="mt-11 md:mt-16">
-        <img className="absolute top-4 right-4" src={LogoUNEB} alt="logo" />
-        <h1 className="font-bold text-4xl md:text-center ">Dados Cadastrais</h1>
+      <section className="mt-16 self-start md:mt-16 md:self-center">
+        <img
+          className="absolute top-4 right-4 w-16 md:w-24"
+          src={LogoUNEB}
+          alt="logo"
+        />
+        <h1 className="font-bold text-3xl md:text-4xl md:text-center ">
+          Dados Cadastrais
+        </h1>
       </section>
       <section className="w-full px-20 flex justify-center">
         <Outlet context={[values, onChange]} />
       </section>
-      <section className="w-full gap-10 flex justify-center">
+      <section className="w-full gap-10 flex justify-center mb-5">
         <Link to={manager[pathname].link1}>
           <Button icon={ArrowLeft} className={manager[pathname].className1}>
             {manager[pathname].name1}

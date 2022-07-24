@@ -101,13 +101,13 @@ export function FinalForm() {
       />
       <FormContent>
         <FormSection>
-          <div className="w-full  md:w-3/12">
-            <h1 className="text-xl mb-2 text-white">Foto:</h1>
+          <div className="w-full  lg:w-3/12">
+            <h1 className="text-xl mb-2 truncate text-white">Foto:</h1>
             <Button
               onClick={handleOpenModalImage}
               endIcon
               icon={uploadPhoto ? CheckFile : AddFile}
-              className={`border-2 rounded-2xl w-full md:w-52 ${
+              className={`border-2 rounded-2xl w-full ${
                 uploadPhoto && "bg-green-400 hover:bg-green-500"
               } 
            `}
@@ -118,28 +118,28 @@ export function FinalForm() {
 
           <TextField
             name="course"
-            className="w-full  md:w-4/12"
-            describe="Curso egresso"
+            className="w-full  lg:w-4/12"
+            describe="Curso Egresso"
             value={values.course}
             onChange={onChange}
           />
           <TextField
             name="yearFinish"
             type="date"
-            className="w-full  md:w-4/12"
+            className="w-full  lg:w-4/12"
             describe="Ano de Conclusão"
             value={values.yearFinish}
             onChange={onChange}
           />
 
-          <div className="w-full flex gap-5">
-            <div>
-              <h1 className="text-xl mb-2 text-white">Educação:</h1>
+          <div className="w-full lg:w-4/6 flex flex-wrap gap-5">
+            <div className="w-full lg:w-4/12">
+              <h1 className="text-xl mb-2 truncate text-white">Educação:</h1>
               <Button
                 onClick={handleOpenModalEducation}
                 endIcon
                 icon={addEducation ? Check : Plus}
-                className={`border-2 rounded-2xl w-full md:w-64 ${
+                className={`border-2 rounded-2xl w-full  ${
                   addEducation && "bg-green-400 hover:bg-green-500"
                 } 
            `}
@@ -147,15 +147,15 @@ export function FinalForm() {
                 {addEducation ? "Alterar" : "Carregar"}
               </Button>
             </div>
-            <div>
-              <h1 className="text-xl mb-2 text-white">
+            <div className="w-full lg:w-4/12">
+              <h1 className="text-xl mb-2 truncate text-white">
                 Experiência Profissional:
               </h1>
               <Button
                 onClick={handleOpenModalExperience}
                 endIcon
                 icon={addExperience ? Check : Plus}
-                className={`border-2 rounded-2xl w-full md:w-64 ${
+                className={`border-2 rounded-2xl w-full  ${
                   addExperience && "bg-green-400 hover:bg-green-500"
                 } 
            `}
@@ -168,28 +168,28 @@ export function FinalForm() {
         <FormSection>
           <TextField
             name="facebook"
-            className="w-full  md:w-5/12"
+            className="w-full  lg:w-5/12"
             describe="Facebook"
             value={values.facebook}
             onChange={onChange}
           />
           <TextField
             name="linkedin"
-            className="w-full  md:w-5/12"
+            className="w-full  lg:w-5/12"
             describe="LinkedIn"
             value={values.linkedin}
             onChange={onChange}
           />
           <TextField
             name="instagram"
-            className="w-full  md:w-5/12"
+            className="w-full  lg:w-5/12"
             describe="Instagram"
             value={values.instagram}
             onChange={onChange}
           />
           <TextField
             name="lattes"
-            className="w-full  md:w-5/12"
+            className="w-full  lg:w-5/12"
             describe="Currículo Lattes"
             value={values.lattes}
             onChange={onChange}
