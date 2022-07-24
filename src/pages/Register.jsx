@@ -53,7 +53,7 @@ const manager = {
 export function Register() {
   const [values, setValues] = useState(initialValues);
   const { pathname } = useLocation();
-  console.log(values);
+
   const onChange = (ev) => {
     const { value, name } = ev.target;
 

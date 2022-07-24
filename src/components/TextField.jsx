@@ -20,7 +20,9 @@ export function TextField({
     <div className={`flex flex-col gap-2 w-full ${className}`}>
       {describe && (
         <label
-          className={`${error ? "text-red-500" : "text-white"} text-xl`}
+          className={`${
+            error ? "text-red-500" : "text-white"
+          } text-lg break-normal truncate`}
           htmlFor={name}
         >
           {describe}:

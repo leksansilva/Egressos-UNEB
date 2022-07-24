@@ -49,7 +49,7 @@ export function ModalEducation({ open, closeModal, handleSaveEducations }) {
           {educations.map((value, index) => (
             <div key={index} className="mt-2">
               <h2 className="text-white text-xl font-semibold">
-                Descrição {index + 1}
+                Graduação {index + 1}
               </h2>
               <div className="flex gap-7">
                 <TextField
@@ -74,7 +74,7 @@ export function ModalEducation({ open, closeModal, handleSaveEducations }) {
                   describeDefault="Atualmente"
                   options={years}
                   className=" w-3/12"
-                  describe="Término"
+                  describe="Até"
                 />
                 {educations.length > 0 && (
                   <Button

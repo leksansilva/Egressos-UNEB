@@ -51,6 +51,26 @@ export function FinalForm() {
     }
   };
 
+  const handleSaveExperiences = (experiences) => {
+    if (experiences[0].describe !== "" && experiences[0].initialYear !== "0") {
+      setOpenModalExperience(false);
+    } else {
+      return;
+    }
+
+    if (
+      experiences.length > 0 &&
+      experiences[0].describe !== "" &&
+      experiences[0].initialYear !== "0"
+    ) {
+      setAddExperience(true);
+      const event = { target: { name: "experiences", value: experiences } };
+      onChange(event);
+    } else {
+      setAddExperience(false);
+    }
+  };
+
   const handleOpenModalImage = () => {
     setOpenModalImage(!openModalImage);
   };
@@ -72,6 +92,7 @@ export function FinalForm() {
       <ModalExperience
         closeModal={handleOpenModalExperience}
         open={openModalExperience}
+        handleSaveExperiences={handleSaveExperiences}
       />
       <ModalEducation
         closeModal={handleOpenModalEducation}
@@ -98,7 +119,7 @@ export function FinalForm() {
           <TextField
             name="course"
             className="w-full  md:w-4/12"
-            describe="Curso"
+            describe="Curso egresso"
             value={values.course}
             onChange={onChange}
           />
