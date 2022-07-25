@@ -4,7 +4,7 @@ import { Button } from "./Button";
 export function Card({ student }) {
   console.log(student);
   return (
-    <div className="flex w-full md:w-5/12  rounded-lg h-64 shadow-xl">
+    <div className="flex w-full md:w-5/12 rounded-lg h-64 shadow-xl">
       <div className="p-1 w-5/12 flex gap-3 flex-col bg-brand-500 rounded-l-lg">
         <div className="h-4/6 ">
           <div
@@ -18,7 +18,7 @@ export function Card({ student }) {
           />
         </div>
         <h1 className="text-xs md:text-[16px] font-semibold text-center text-white">
-          {student.name}
+          {student.name}, {student.pronoun}
         </h1>
         <h1 className="text-center text-xs md:text-[16px] font-semibold text-white mb-3">
           {student.country

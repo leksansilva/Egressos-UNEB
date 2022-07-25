@@ -1,4 +1,4 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { Button } from "../components/Button";
@@ -13,15 +13,16 @@ export function Register() {
   const [values, setValues] = useState(initialValues);
   const [optionsCourses, setOptionsCoursers] = useState([]);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const onChange = (ev) => {
     const { value, name } = ev.target;
 
     setValues({ ...values, [name]: value });
   };
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    console.log(values);
     const educations = values.educations;
     const experiences = values.experiences;
     values.id_course = parseInt(values.id_course);
@@ -30,11 +31,50 @@ export function Register() {
       .post("/register-egresso", values)
       .then((response) => {
         if (response.status === 200) {
+          const studentId = response.data.id_student;
+          const success = handlePostOthers(studentId, educations, experiences);
+          if (success) {
+            navigate("/");
+          }
         }
       })
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  const handlePostOthers = (studentId, educations, experiences) => {
+    let ok = true;
+    const schoolHistory = {
+      id_student: studentId,
+      history: educations.map((education) => ({
+        history: education.describe,
+        dateInitiated: education.initialYear,
+        dateClosing: education.finalYear,
+      })),
+    };
+    api
+      .post("/schoolhistory", schoolHistory)
+      .then((response) => {})
+      .catch((err) => {
+        ok = false;
+      });
+
+    const procareer = {
+      id_student: studentId,
+      procareer: experiences.map((experience) => ({
+        procareer: experience.describe,
+        dateInitiated: experience.initialYear,
+        dateClosing: experience.finalYear,
+      })),
+    };
+    api
+      .post("/procareer", procareer)
+      .then((response) => {})
+      .catch((err) => {
+        ok = false;
+      });
+    return ok;
   };
 
   useEffect(() => {

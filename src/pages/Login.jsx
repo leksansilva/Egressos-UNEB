@@ -19,8 +19,6 @@ const initialValues = {
 export function Login() {
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState(false);
-  const { message } = useContext(NotificationContext);
-  console.log(message);
 
   const onChange = (ev) => {
     const { value, name } = ev.target;

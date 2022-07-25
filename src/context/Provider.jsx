@@ -1,13 +1,14 @@
+import { useState } from "react";
 import { NotificationContext } from "./Context";
 
-export function Provider({ children }) {
+export function NotificationProvider({ children }) {
+  const [notification, setNotification] = useState({
+    message: "",
+    type: "sucess",
+  });
+
   return (
-    <NotificationContext.Provider
-      value={{
-        message: "oi",
-        type: 1,
-      }}
-    >
+    <NotificationContext.Provider value={{ notification, setNotification }}>
       {children}
     </NotificationContext.Provider>
   );

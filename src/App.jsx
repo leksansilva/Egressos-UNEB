@@ -1,11 +1,11 @@
-import { NotificationContext } from "./context/Context";
+import { NotificationProvider } from "./context/Provider";
 import { MainRoutes } from "./MainRoutes";
 
 function App() {
   return (
-    <NotificationContext.Provider>
+    <NotificationProvider>
       <MainRoutes />
-    </NotificationContext.Provider>
+    </NotificationProvider>
   );
 }
 
