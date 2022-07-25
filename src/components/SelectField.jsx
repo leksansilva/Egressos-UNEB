@@ -1,7 +1,7 @@
 export function SelectField({
   value,
   onChange,
-  options,
+  options = [],
   name,
   error,
   describe,
@@ -21,14 +21,15 @@ export function SelectField({
         onChange={onChange}
         name={name}
         id={name}
-        className="rounded-2xl h-11 w-full outline-none scrollbar"
+        className="px-5 rounded-2xl h-11 w-full outline-none scrollbar"
       >
         <option value={0}>{describeDefault}</option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
+        {options.length &&
+          options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
       </select>
     </div>
   );

@@ -5,10 +5,10 @@ import { Filter } from "./Filter";
 export function Navigator() {
   return (
     <div
-      className="w-9/12  flex items-center self-start md:self-center
-      mt-5 md:mt-20 h-16 rounded-2xl bg-brand-500 overflow-hidden"
+      className="w-10/12  md:w-8/12 flex items-center self-start md:self-center
+      mt-0 md:mt-20 h-16 rounded-2xl bg-brand-500 overflow-hidden"
     >
-      <img src={logoEgressos} alt="logo egressos" className="mx-7 h-5/6" />
+      <img src={logoEgressos} alt="logo egressos" className="mx-7 h-4/6" />
       <input
         type="text"
         id="search"
@@ -18,7 +18,7 @@ export function Navigator() {
 
       <Filter />
       <Link to="/login">
-        <h2 className="text-white font-bold ml-24">LOGIN</h2>
+        <h2 className="text-white font-bold mx-12 lg:mx-0 lg:ml-24">LOGIN</h2>
       </Link>
     </div>
   );

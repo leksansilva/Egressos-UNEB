@@ -13,9 +13,10 @@ import CheckFile from "../../assets/icons/checkFile.svg";
 import AddFile from "../../assets/icons/addFile.svg";
 import Plus from "../../assets/icons/plus.svg";
 import Check from "../../assets/icons/check.svg";
+import { SelectField } from "../SelectField";
 
 export function FinalForm() {
-  const [values, onChange] = useOutletContext();
+  const [values, onChange, optionsCourses] = useOutletContext();
   const [uploadPhoto, setUploadPhoto] = useState(false);
   const [openModalImage, setOpenModalImage] = useState(false);
   const [openModalEducation, setOpenModalEducation] = useState(false);
@@ -71,8 +72,11 @@ export function FinalForm() {
     }
   };
 
-  const handleOpenModalImage = () => {
+  const handleOpenModalImage = (cancel) => {
     setOpenModalImage(!openModalImage);
+    if (cancel) {
+      setUploadPhoto(false);
+    }
   };
 
   const handleOpenModalEducation = () => {
@@ -116,11 +120,12 @@ export function FinalForm() {
             </Button>
           </div>
 
-          <TextField
-            name="course"
+          <SelectField
+            name="id_course"
             className="w-full  lg:w-4/12"
             describe="Curso Egresso"
-            value={values.course}
+            value={values.id_course}
+            options={optionsCourses}
             onChange={onChange}
           />
           <TextField
@@ -133,7 +138,7 @@ export function FinalForm() {
           />
 
           <div className="w-full lg:w-4/6 flex flex-wrap gap-5">
-            <div className="w-full lg:w-4/12">
+            <div className="w-full lg:w-5/12">
               <h1 className="text-xl mb-2 truncate text-white">Educação:</h1>
               <Button
                 onClick={handleOpenModalEducation}
@@ -147,7 +152,7 @@ export function FinalForm() {
                 {addEducation ? "Alterar" : "Carregar"}
               </Button>
             </div>
-            <div className="w-full lg:w-4/12">
+            <div className="w-full lg:w-5/12">
               <h1 className="text-xl mb-2 truncate text-white">
                 Experiência Profissional:
               </h1>

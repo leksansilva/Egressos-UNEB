@@ -1,23 +1,13 @@
-import { useEffect } from "react";
-import { api } from "../lib/api";
 import { Card } from "./Card";
+import { Loading } from "./Loading";
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-export function Main() {
-  useEffect(() => {
-    api
-      .get("/students-all")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {});
-  }, []);
-
-  return (
+export function Main({ cards, loading }) {
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="flex justify-center flex-wrap gap-9">
-      {cards.map((cards) => (
-        <Card key={cards} />
+      {cards.map((card) => (
+        <Card key={card.students.id} student={card.students} />
       ))}
     </div>
   );

@@ -19,14 +19,19 @@ export function ModalImage({ open, closeModal, handleUploadPhoto }) {
     };
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "image/*": [],
+    },
+  });
 
   const handleClickSaveImage = () => {
     handleUploadPhoto(blobImage);
   };
 
   const handleCancel = () => {
-    closeModal();
+    closeModal(true);
     setBlobImage("");
   };
 
@@ -51,8 +56,6 @@ export function ModalImage({ open, closeModal, handleUploadPhoto }) {
             disabled
             className="hidden"
             id="inputImage"
-            type="file"
-            accept="image/*"
             {...getInputProps()}
           />
         </label>

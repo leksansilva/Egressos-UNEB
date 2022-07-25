@@ -1,0 +1,41 @@
+export const initialValues = {
+  name: "",
+  password: "",
+  id_course: 0,
+  cpf: "",
+  rg: "",
+  birthDate: "",
+  linkedin: "",
+  photo: "",
+  lattes: "",
+  pronoun: "",
+  contact: "",
+  email: "",
+  city: "",
+  state: "",
+  country: "",
+  yearFinish: "",
+  facebook: "",
+  instagram: "",
+  experiences: [],
+  educations: [],
+};
+
+export const manager = {
+  "/register/data1": {
+    link1: "/login",
+    link2: "data2",
+    name1: "Cancelar",
+    name2: "Próximo",
+    className1: "bg-red-400 hover:bg-red-500",
+    className2: "",
+  },
+  "/register/data2": {
+    link1: "data1",
+    link2: "noLink",
+    name1: "Voltar",
+    name2: "Enviar",
+    className1: "",
+    className2: "bg-green-400 hover:bg-green-500",
+  },
+};

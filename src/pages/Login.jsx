@@ -8,6 +8,7 @@ import RegisterIcon from "../assets/icons/register.svg";
 
 import { TextField } from "../components/TextField";
 import { Loading } from "../components/Loading";
+import { api } from "../lib/api";
 
 const initialValues = {
   login: "",
@@ -28,6 +29,14 @@ export function Login() {
     ev.preventDefault();
 
     setLoading(true);
+    api
+      .post("/login", values)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setLoading(false);
   };
 
@@ -35,32 +44,32 @@ export function Login() {
     <Loading screen />
   ) : (
     <>
-      <div className="absolute top-4 right-4 circle bg-white w-32 h-32">
-        <img src={LogoUNEB} alt="logo" className="m-auto" />
+      <div className="absolute top-4 right-4 circle bg-white w-24 h-24 md:w-32 md:h-32">
+        <img src={LogoUNEB} alt="logo" className="m-auto w-auto" />
       </div>
-      <div className="w-[100vw] h-[100vh] bg-brand-500 pt-44 px-40 flex justify-center items-center">
-        <section className="w-1/2 h-full flex flex-col items-center">
-          <h1 className="font-bold text-4xl text-center text-white">
+      <div className="w-[100vw] h-[100vh] overflow-hidden bg-brand-500 pl-5 md:pt-44 md:px-40 flex flex-col  md:flex-row justify-center items-center">
+        <section className="w-2/6 md:w-1/2 h-full mb-[100px] self-start flex flex-col-reverse md:flex-col md:items-center">
+          <h1 className="font-bold text-xl md:text-4xl text-center text-white">
             Faça o login em nossa plataforma
           </h1>
           <img
             src={LogoEgressos}
-            className="h-auto w-56 mt-14"
+            className="h-32 w-32 md:mt-14 md:w-56 md:h-56"
             alt="logo egressos"
           />
         </section>
-        <section className="w-1/2 h-full">
+        <section className="w-64 md:w-1/2 h-full">
           <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <h1 className="font-semibold text-4xl text-center text-white">
+            <h1 className="font-semibold text-xl md:text-4xl text-center text-white">
               LOGIN
             </h1>
             <TextField
               fullWidth
-              className="mt-11 w-5/6"
+              className="md:mt-11 w-5/6"
               type="text"
               onChange={onChange}
               value={values.login}
-              describe="Usuário"
+              describe="CPF"
               name="login"
             />
             <TextField
@@ -73,11 +82,17 @@ export function Login() {
               name="password"
             />
 
-            <button type="submit">
-              <img src={LoginIcon} alt="Login" className="mt-8" />
+            <button
+              className="h-6 w-6 md:h-20 md:w-20 mt-3 md:mt-8"
+              type="submit"
+            >
+              <img src={LoginIcon} alt="Login" className="h-auto" />
             </button>
-            <Link to="/register/data1" className="mt-8 flex gap-3">
-              <p className="text-lg text-white font-semibold">
+            <Link
+              to="/register/data1"
+              className="mt-3 md:mt-8 flex gap-1 md:gap-3"
+            >
+              <p className="md:text-lg text-white font-semibold">
                 Não tem uma conta?Cadastre-se
               </p>
               <img src={RegisterIcon} className="w-auto h-6" alt="Login" />

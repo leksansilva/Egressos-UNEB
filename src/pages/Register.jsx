@@ -1,57 +1,17 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "../components/Button";
 
 import LogoUNEB from "../assets/logo/uneb.svg";
 import ArrowLeft from "../assets/icons/arrowLeft.svg";
 import ArrowRight from "../assets/icons/arrowRight.svg";
-
-const initialValues = {
-  name: "",
-  password: "",
-  course: "",
-  cpf: "",
-  rg: "",
-  birthDate: "",
-  linkedin: "",
-  photo: "",
-  lattes: "",
-  pronoun: "",
-  contact: "",
-  email: "",
-  city: "",
-  state: "",
-  country: "",
-  status: 1,
-  yearFinish: "",
-  facebook: "",
-  instagram: "",
-  experiences: [],
-  educations: [],
-};
-
-const manager = {
-  "/register/data1": {
-    link1: "/login",
-    link2: "data2",
-    name1: "Cancelar",
-    name2: "Próximo",
-    className1: "bg-red-400 hover:bg-red-500",
-    className2: "",
-  },
-  "/register/data2": {
-    link1: "data1",
-    link2: "noLink",
-    name1: "Voltar",
-    name2: "Enviar",
-    className1: "",
-    className2: "bg-green-400 hover:bg-green-500",
-  },
-};
+import { api } from "../lib/api";
+import { initialValues, manager } from "../utils/presets";
 
 export function Register() {
   const [values, setValues] = useState(initialValues);
+  const [optionsCourses, setOptionsCoursers] = useState([]);
   const { pathname } = useLocation();
 
   const onChange = (ev) => {
@@ -62,7 +22,29 @@ export function Register() {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     console.log(values);
+    const educations = values.educations;
+    const experiences = values.experiences;
+
+    api
+      .post("/register", values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
+
+  useEffect(() => {
+    api
+      .get("/course-all")
+      .then((response) => {
+        const courses = response.data;
+        const data = courses.map((i) => ({ value: i.id, label: i.course }));
+        setOptionsCoursers(data);
+      })
+      .catch((err) => {});
+  }, []);
 
   return (
     <form
@@ -80,7 +62,7 @@ export function Register() {
         </h1>
       </section>
       <section className="w-full px-20 flex justify-center">
-        <Outlet context={[values, onChange]} />
+        <Outlet context={[values, onChange, optionsCourses]} />
       </section>
       <section className="w-full gap-10 flex justify-center mb-5">
         <Link to={manager[pathname].link1}>
