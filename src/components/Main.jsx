@@ -7,7 +7,11 @@ export function Main({ cards, loading }) {
   ) : (
     <div className="flex justify-center flex-wrap gap-9">
       {cards.map((card) => (
-        <Card key={card.students.id} student={card.students} />
+        <Card
+          key={card.students.id}
+          student={card.students}
+          address={card.address}
+        />
       ))}
     </div>
   );

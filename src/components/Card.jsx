@@ -1,8 +1,18 @@
+import { useEffect, useState } from "react";
 import EmptyImage from "../assets/example/empty.png";
+import { api } from "../lib/api";
 import { Button } from "./Button";
 
-export function Card({ student }) {
-  console.log(student);
+export function Card({ student, address }) {
+  const [experiences, setExperiences] = useState([]);
+
+  useEffect(() => {
+    api.get("/procareer-all", { id_student: student.id }).then((response) => {
+      setExperiences(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
   return (
     <div className="flex w-full md:w-5/12 rounded-lg h-64 shadow-xl">
       <div className="p-1 w-5/12 flex gap-3 flex-col bg-brand-500 rounded-l-lg">
@@ -21,8 +31,8 @@ export function Card({ student }) {
           {student.name}, {student.pronoun}
         </h1>
         <h1 className="text-center text-xs md:text-[16px] font-semibold text-white mb-3">
-          {student.country
-            ? student.country + "," + student.city + "- BA"
+          {address.country
+            ? address.country + ", " + address.city + " - " + address.state
             : "Endereço não informado"}
         </h1>
       </div>
@@ -30,11 +40,18 @@ export function Card({ student }) {
         <h1 className="h-1/6 font-semibold text-center mb-2 ">
           Atuação profissional
         </h1>
-        <p className="h-4/6 break-all text-sm overflow-auto scrollbar ">
-          is simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's is simply dummy text of the printing and
-          typesetting industry. Lorem Ipsum has been the industry's
-        </p>
+        <div className="h-4/6 break-all text-sm overflow-auto scrollbar ">
+          <ul>
+            {experiences.map((experience) => (
+              <li key={experience.procareer.id}>
+                <strong>{experience.procareer.procareer + "  "}</strong>
+                {experience.procareer.dateInitiated +
+                  " - " +
+                  experience.procareer.dateClosing}
+              </li>
+            ))}
+          </ul>
+        </div>
         <Button className="text-xs md:text-sm h-1/6 ">Abrir Perfil</Button>
       </div>
     </div>

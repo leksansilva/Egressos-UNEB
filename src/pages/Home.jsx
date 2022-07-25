@@ -7,18 +7,21 @@ import { api } from "../lib/api";
 export function Home() {
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
-
+  console.log(students);
   useEffect(() => {
     setLoading(true);
     api
       .get("/students-all")
       .then((response) => {
         if (response.status === 200) {
-          setLoading(false);
           setStudents(response.data);
+          setLoading(false);
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        setLoading(false);
+        if (error.response.status === 404);
+      });
   }, []);
 
   return (
