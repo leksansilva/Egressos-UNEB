@@ -24,11 +24,13 @@ export function Register() {
     console.log(values);
     const educations = values.educations;
     const experiences = values.experiences;
+    values.id_course = parseInt(values.id_course);
 
     api
-      .post("/register", values)
+      .post("/register-egresso", values)
       .then((response) => {
-        console.log(response);
+        if (response.status === 200) {
+        }
       })
       .catch((err) => {
         console.error(err);

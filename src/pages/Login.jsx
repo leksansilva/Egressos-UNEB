@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import LogoUNEB from "../assets/logo/uneb.svg";
 import LogoEgressos from "../assets/logo/egressos.svg";
@@ -9,6 +9,7 @@ import RegisterIcon from "../assets/icons/register.svg";
 import { TextField } from "../components/TextField";
 import { Loading } from "../components/Loading";
 import { api } from "../lib/api";
+import { NotificationContext } from "../context/Context";
 
 const initialValues = {
   login: "",
@@ -18,6 +19,8 @@ const initialValues = {
 export function Login() {
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState(false);
+  const { message } = useContext(NotificationContext);
+  console.log(message);
 
   const onChange = (ev) => {
     const { value, name } = ev.target;
@@ -47,8 +50,8 @@ export function Login() {
       <div className="absolute top-4 right-4 circle bg-white w-24 h-24 md:w-32 md:h-32">
         <img src={LogoUNEB} alt="logo" className="m-auto w-auto" />
       </div>
-      <div className="w-[100vw] h-[100vh] overflow-hidden bg-brand-500 pl-5 md:pt-44 md:px-40 flex flex-col  md:flex-row justify-center items-center">
-        <section className="w-2/6 md:w-1/2 h-full mb-[100px] self-start flex flex-col-reverse md:flex-col md:items-center">
+      <div className="w-[100vw] h-[100vh] overflow-hidden bg-brand-500 pl-5 md:pt-44 md:px-40 flex flex-col  md:flex-row gap-5 justify-center items-center">
+        <section className="w-2/6  md:w-1/2 h-1/2 md:h-full  flex flex-col-reverse  self-start justify-end mt-2 md:justify-start md:flex-col md:items-center">
           <h1 className="font-bold text-xl md:text-4xl text-center text-white">
             Faça o login em nossa plataforma
           </h1>
